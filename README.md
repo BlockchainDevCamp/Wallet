@@ -10,7 +10,7 @@ The `Wallet App` is an application which:
 
 In order to launch the `Wallet App` server you would need to execute the following command in the command line:
 ```
-npm stat
+npm start
 ```
 
 Environment could be specified when launching the server as well:
