@@ -21,8 +21,7 @@ class TransactionData {
         let senderPublicKey = request.body['senderPubKey'];
         let amount = request.body['value'];
         let fee = request.body['fee'];
-        let dateCreated = '2018-02-10T17:53:48.972Z'; //
-            // dateformat(new Date(), "isoUtcDateTime"); // ISO8601 UTC datetime string
+        let dateCreated = dateformat(new Date(), "isoUtcDateTime"); // ISO8601 UTC datetime string
 
         return new TransactionData(senderAddress, recipientAddress, senderPublicKey, amount, fee, dateCreated);
     }
