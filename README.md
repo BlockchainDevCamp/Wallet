@@ -23,7 +23,7 @@ where `<ENVIRONMENT_NAME>` should be the value of the corresponding environment 
 
 ## Retrieve Wallet Info
 
-Please note that this endpoint is NOT be available on production environment.
+Please note that this endpoint is NOT available on production environment.
 
 ### Example 
 
