@@ -11,7 +11,7 @@ module.exports = {
         else {
             let wallet = WalletRepository.walletByAddress(address);
             if (!wallet) {
-                next(new Error("WalletRepository not found."));
+                next(new Error("Wallet not found."));
             } else {
                 request.wallet = wallet;
                 next();
