@@ -1,4 +1,4 @@
-// 'use strict';
+'use strict';
 
 const Crypto = require('../Crypto');
 
@@ -13,9 +13,10 @@ class Wallet {
         this.address = address;
     }
 
-    static createWallet(privateKeyStr) {
+    static loadWallet(privateKeyStr) {
+        // TODO enhance validation
         if (!privateKeyStr) {
-            throw new Error("Missing private key.");
+            throw new Error("Invalid private key.");
         }
 
         let publicKey = Crypto.derivePublicKey(privateKeyStr);
