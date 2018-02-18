@@ -21,6 +21,33 @@ where `<ENVIRONMENT_NAME>` should be the value of the corresponding environment 
 
 # API
 
+## Load Existing Wallet
+
+
+### Example 
+
+#### Request
+```
+POST /wallets
+{
+  "privateKey": "7e4670ae70c98d24f3662c172dc510a085578b9ccc717e6c2f4e547edd960a34"
+}
+```
+
+#### Response
+On successful call the status would be either: 
+* `201`, i.e. a new wallet was created on the server or 
+* `200`, i.e. the resource does already exist.
+
+The payload would be look in the following way:
+```
+{
+    "privateKey": "7e4670ae70c98d24f3662c172dc510a085578b9ccc717e6c2f4e547edd960a34",
+    "publicKey": "c74a8458cd7a7e48f4b7ae6f4ae9f56c5c88c0f03e7c59cb4132b9d9d1600bba1",
+    "address": "c3293572dbe6ebc60de4a20ed0e21446cae66b17"
+}
+```
+
 ## Retrieve Wallet Info
 
 Please note that this endpoint is NOT available on production environment.
