@@ -8,9 +8,11 @@ module.exports = app => {
     // executed every time `:address` is found in the path; before any controller
     app.param('address', middlewares.walletFilter.retrieveWalletByAddress);
 
-    // lower environments only
+    // Wallet Endpoints
     app.get("/wallets/:address", controllers.walletResource.retrieveWalletByAddress);
+    app.post("/wallets", controllers.walletResource.loadWallet);
 
+    // Transaction Endpoints
     app.post('/wallets/:address/transactions', [
         controllers.transactionResource.validateTransactionData,
         controllers.transactionResource.createTransaction
