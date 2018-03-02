@@ -25,6 +25,11 @@ class Wallet {
 
         return new Wallet(privateKeyStr, publicKey, compressedPublicKey, address);
     }
+
+    static createWallet() {
+        let privateKey = Crypto.createPrivateKey();
+        return Wallet.loadWallet(privateKey);
+    }
 }
 
 module.exports = Wallet;

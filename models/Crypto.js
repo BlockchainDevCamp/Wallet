@@ -14,6 +14,12 @@ const G = secp256k1Curve.g;
 
 class Crypto {
 
+    // 256-bit number / 64 hex digits
+    static createPrivateKey() {
+        // TODO: try to implement the generation of private key on your own
+        return secp256k1Curve.genKeyPair().priv.toString(16);
+    }
+
     static derivePublicKey(privateKeyString) {
 
         // point P = k * G
