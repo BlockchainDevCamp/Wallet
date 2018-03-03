@@ -49,7 +49,7 @@ The payload would be look in the following way:
 
 #### Request
 ```
-POST /wallets
+PUT /wallets
 {
   "privateKey": "7e4670ae70c98d24f3662c172dc510a085578b9ccc717e6c2f4e547edd960a34"
 }
