@@ -1,9 +1,9 @@
 # Wallet App
 
 The `Wallet App` is an application which:
-* Creates a new wallet (generating private and public key on behalf of the user)
-* Loads an existing wallet (by data + password)
-* Creates, signs and sends transactions 
+* [Creates a new wallet (generating private and public key on behalf of the user)](#create-wallet)
+* [Loads an existing wallet (by data + password)](#load-existing-wallet)
+* [Creates, signs](#create-transaction) and sends transactions 
 * Provides access to balance
 
 # Launching
@@ -21,8 +21,29 @@ where `<ENVIRONMENT_NAME>` should be the value of the corresponding environment 
 
 # API
 
-## Load Existing Wallet
+## Create Wallet
 
+
+### Example 
+
+#### Request
+```
+POST /wallets
+```
+
+#### Response
+
+The payload would be look in the following way:
+```
+201 - successful call
+{
+    "privateKey": "d4533c6141d72c7ad542ea64d25f8ed820195adc09537fc74dacbb283354c64f",
+    "publicKey": "b51eccb98ce565474ef06d4145b96e4a397f929190c007dc703eeeb42ce71a701",
+    "address": "a838fdabe6c9ddd8b01c4dfdb736d3d9e7240d0d"
+}
+```
+
+## Load Existing Wallet
 
 ### Example 
 
