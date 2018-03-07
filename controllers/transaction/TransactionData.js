@@ -25,6 +25,16 @@ class TransactionData {
 
         return new TransactionData(senderAddress, recipientAddress, senderPublicKey, amount, fee, dateCreated);
     }
+
+    static loadTransactionData(transaction) {
+        return new TransactionData(
+            transaction.from,
+            transaction.to,
+            transaction.senderPubKey,
+            transaction.value,
+            transaction.fee,
+            transaction.dateCreated);
+    }
 }
 
 module.exports = TransactionData;

@@ -18,6 +18,10 @@ module.exports = app => {
         controllers.transactionResource.validateTransactionData,
         controllers.transactionResource.createTransaction
     ]);
+    app.post('/wallets/:address/transactions/send', [
+        controllers.transactionResource.validateTransactionData,
+        controllers.transactionResource.submitTransaction
+    ]);
 
     app.use(controllers.errorHandler.handle);
 
