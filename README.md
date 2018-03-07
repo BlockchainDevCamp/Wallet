@@ -3,7 +3,7 @@
 The `Wallet App` is an application which:
 * [Creates a new wallet (generating private and public key on behalf of the user)](#create-wallet)
 * [Loads an existing wallet (by data + password)](#load-existing-wallet)
-* [Creates, signs](#create-transaction) and sends transactions 
+* [Creates, signs](#create-transaction) and [sends transactions](#send-transaction)
 * Provides access to balance
 
 # Launching
@@ -128,5 +128,36 @@ At the moment `:address` should have the value of the `from` field.
     ]
 }
 ```
+
+## Send Transaction
+
+Creates a transaction and sends it to a node for mining and further propagation. 
+
+Note: At the moment te `Wallet` expects to be running along with a `Node` which could be found on `http://127.0.0.1:5555`.
+
+### Example 
+
+#### Request
+
+```
+POST /wallets/:address/transactions/send
+{
+  "from": "c3293572dbe6ebc60de4a20ed0e21446cae66b17",
+  "to": "f51362b7351ef62253a227a77751ad9b2302f911",
+  "senderPubKey": "c74a8458cd7a7e48f4b7ae6f4ae9f56c5c88c0f03e7c59cb4132b9d9d1600bba1",
+  "value": 25000, 
+  "fee": 10
+}
+```
+At the moment `:address` should have the value of the `from` field.
+
+#### Response
+```
+200 - successful call
+{
+    "transactionHash": "b2e0d16602bf0a8e5a78b1d0133e535afe85638112b45cc511bbafc2a8279f34"
+}
+```
+
 # Future Work
 * The `Wallet App` might be based on the HD wallet standards (BIP-39 / BIP-32)

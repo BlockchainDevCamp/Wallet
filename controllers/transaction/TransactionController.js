@@ -1,6 +1,9 @@
 'use strict'
 
 const Transaction = require('./Transaction');
+const TransactionHash = require('./TransactionHash');
+
+const request = require('request');
 
 module.exports = {
 
@@ -11,7 +14,7 @@ module.exports = {
             response.status(200);
             response.set('Content-Type', 'application/json');
             response.send(transaction);
-        } catch(err) {
+        } catch (err) {
             console.error(err);
             next(new Error("Transaction creation failed."));
         }
@@ -48,7 +51,31 @@ module.exports = {
             return;
         }
         next();
+    },
+
+    submitTransaction: async (rqst, rspns) => {
+        let transaction = Transaction.createTransaction(rqst);
+        let transactionHash = new TransactionHash(transaction);
+        let options = {
+            method: 'post',
+            body: transaction,
+            json: true,
+            // TODO: move to a configuration
+            url: "http://127.0.0.1:5555/transactions",
+        };
+
+        await request(options, function (err, res, transactionHashBody) {
+            if (err) {
+                throw Error("Error: " + err.getMessage());
+            }
+            if (!transactionHashBody || !transactionHashBody.transactionHash
+                || transactionHash.transactionHash !== transactionHashBody.transactionHash) {
+                throw Error("Compromised transaction.");
+            }
+
+            rspns.status(201);
+            rspns.set('Content-Type', 'application/json');
+            rspns.send(transactionHashBody);
+        });
     }
-
-
 };
