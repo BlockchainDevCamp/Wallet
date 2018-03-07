@@ -26,6 +26,15 @@ class Crypto {
         return G.mul(privateKeyString);
     }
 
+    static derivePublicKeyFromCompressedPublicKey(compressedPublicKey) {
+        let publicKeyXHex = compressedPublicKey.substring(0, compressedPublicKey.length - 1);
+        let odd = compressedPublicKey.substring(compressedPublicKey.length - 1);
+
+        let publicKeyPoint = secp256k1Curve.curve.pointFromX(publicKeyXHex, odd);
+
+        return secp256k1Curve.keyFromPublic(publicKeyPoint, 'hex');
+    }
+
     // hex(publicKey.x) + compressed(publicKey.y)
     static compressPublicKey(publicKey) {
         let publicKeyCompressedYCoordinate = Crypto.isOdd(BigInteger(publicKey.y)) ? 1 : 0;
@@ -76,7 +85,10 @@ class Crypto {
         return [transactionSignature.r, transactionSignature.s];
     }
 
-    // TODO validate transaction hash
+    static verifySignature(compressedPublicKey, payloadHash, existingSignature) {
+        let publicKey = Crypto.derivePublicKeyFromCompressedPublicKey(compressedPublicKey);
+        return publicKey.verify(payloadHash, existingSignature);
+    }
 }
 
 module.exports = Crypto;
