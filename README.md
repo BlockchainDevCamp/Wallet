@@ -3,7 +3,7 @@
 The `Wallet App` is an application which:
 * [Creates a new wallet (generating private and public key on behalf of the user)](#create-wallet)
 * [Loads an existing wallet (by data + password)](#load-existing-wallet)
-* [Creates, signs](#create-transaction) and [sends transactions](#send-transaction)
+* [Creates, signs](#create-transaction) and [sends](#send-transaction) transactions
 * Provides access to balance
 
 # Launching
@@ -133,7 +133,7 @@ At the moment `:address` should have the value of the `from` field.
 
 Creates a transaction and sends it to a node for mining and further propagation. 
 
-Note: At the moment te `Wallet` expects to be running along with a `Node` which could be found on `http://127.0.0.1:5555`.
+Note: At the moment the `Wallet` expects to be running on the same host along with a `Node` (which respectively could be found at `http://127.0.0.1:5555`).
 
 ### Example 
 
