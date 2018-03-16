@@ -10,6 +10,7 @@ module.exports = app => {
 
     // Wallet Endpoints
     app.get("/wallets/:address", controllers.walletResource.retrieveWalletByAddress);
+    app.get("/wallets/:address/balance", controllers.walletResource.retrieveWalletBalance);
     app.post("/wallets", controllers.walletResource.createWallet);
     app.put("/wallets", controllers.walletResource.loadWallet);
 

@@ -4,6 +4,8 @@ const Wallet = require('../../models/wallet/Wallet');
 const WalletInfo = require('./WalletInfo');
 const WalletRepository = require('../../models/wallet/WalletRepository');
 
+const Request = require('request');
+
 function handleWalletCreation(request, response, wallet) {
     let walletInfo = new WalletInfo(wallet.privateKey, wallet.compressedPublicKey, wallet.address);
     let status = 200;
@@ -37,7 +39,24 @@ module.exports = {
         let privateKey = request.body['privateKey'];
         let wallet = Wallet.loadWallet(privateKey);
         handleWalletCreation(request, response, wallet);
-    }
+    },
 
+    retrieveWalletBalance: async (request, response) => {
+        let options = {
+            method: 'get',
+            json: true,
+            // TODO: move to a configuration
+            url: "http://localhost:5555/addresses/" + request.wallet.address + "/balance",
+        };
+
+        await Request(options, function (err, res, balance) {
+            if (err) {
+                throw Error("Error: " + err.getMessage());
+            }
+            response.set('Content-Type', 'application/json');
+            response.send(balance);
+        });
+
+    }
 };
 

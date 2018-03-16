@@ -159,5 +159,42 @@ At the moment `:address` should have the value of the `from` field.
 }
 ```
 
+
+## Retrieve a Wallet's Balance
+
+Retrieves the balance (confirmed, pending and just mined) for a given wallet. 
+
+Note: At the moment the `Wallet` expects to be running on the same host along with a `Node` (which respectively could be found at `http://127.0.0.1:5555`).
+
+### Example 
+
+#### Request
+
+```
+GET /wallets/0a37ccb342861218ea8331fdf6e4a4a6521e3e55/balance
+```
+
+#### Response
+
+```
+200 - successful call
+{
+    "address": "ac51700449340e5400e13772741c94cc9c457799",
+    "confirmedBalance": {
+        "confirmations": 6,
+        "balance": 15
+    },
+    "lastMinedBalance": {
+        "confirmations": 1,
+        "balance": 25
+    },
+    "pendingBalance": {
+        "confirmations": 0,
+        "balance": 20
+    }
+}
+```
+
+
 # Future Work
 * The `Wallet App` might be based on the HD wallet standards (BIP-39 / BIP-32)
