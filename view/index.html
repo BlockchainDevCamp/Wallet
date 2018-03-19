@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8"/>
+    <title>Blockchain DevCamp Wallet</title>
+    <link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
+    <link rel="stylesheet" type="text/css" href="wallet.css"/>
+    <script src="lib/jquery-3.3.1.min.js"></script>
+    <script src="wallet.js"></script>
+</head>
+
+<body>
+<header id="menu">
+    <a href="#" id="linkHome">Home</a>
+    <a href="#" id="linkCreateWallet">Create Wallet</a>
+    <a href="#" id="linkLoadWallet">Load Wallet</a>
+    <a href="#" id="linkViewBalance">Balance</a>
+    <a href="#" id="linkSendTransaction">Send Transaction</a>
+</header>
+
+<main>
+    <section id="loadingBox">Loading ...</section>
+
+    <section id="infoBox">
+        <header>x</header>
+        <p>Info</p></section>
+
+    <section id="errorBox">
+        <header>x</header>
+        <p>Error</p></section>
+
+    <section id="viewHome">
+        <h1>Blockchain DevCamp Wallet</h1>
+        <p>Welcome to the "Blockchain DevCamp Wallet"</p>
+        <p>This application lets you manage your wallet.</p>
+        It allows you to:
+        <ul>
+            <li>Create a new wallet (generating private and public key on behalf of the user</li>
+            <li>Load an existing wallet (by private key)</li>
+            <li>Create, sign and send transactions</li>
+            <li>Provides access to balance</li>
+        </ul>
+    </section>
+
+    <section id="viewCreateWallet">
+        <h1>Create New Wallet</h1>
+        <p>Generate a new wallet: random private key -&gt; public key -&gt; address.</p>
+
+        <input type="submit" id="documentCreateWallet" value="Generate Now" /><br><br>
+        <textarea id="newWalletContainer" style="width:400pt; height: 100pt;" disabled>
+        </textarea>
+    </section>
+
+    <section id="viewLoadWallet">
+        <h1>Open an Existing Wallet</h1>
+        <p>Enter your wallet private key (compressed ECDSA key, 65 hex digits):</p>
+        <input type="text" name="walletPrivateKey" id="walletPrivateKey" size="65"><br>
+        <input type="submit" id="documentLoadWallet" value="Open Wallet" /><br><br>
+        <textarea id="existingWalletContainer" style="width:400pt; height: 100pt;" disabled>
+        </textarea>
+    </section>
+
+    <section id="viewBalance">
+        <h1>View Account Balance</h1>
+        <label for="viewBalanceWalletAddress">Address: </label>
+        <input type="text" name="viewBalanceWalletAddress" id="viewBalanceWalletAddress" size="40"><br>
+        <label for="viewBalanceBlockchainNode">Blockchain Node (including port): </label>
+        <input type="text" name="viewBalanceBlockchainNode" id="viewBalanceBlockchainNode" size="40"><br>
+        <input type="submit" id="documentViewBalance" value="Display Balance" /><br><br>
+        <textarea id="walletBalanceContainer" style="width:400pt; height: 100pt;" disabled>
+            </textarea>
+    </section>
+
+    <section id="viewSendTransaction">
+        <h1>Send Transaction</h1>
+        <label for="viewSendTransactionSender">Sender: </label>
+        <input type="text" name="viewSendTransactionSender" id="viewSendTransactionSender" size="40"><br>
+        <label for="viewSendTransactionRecipient">Recipient: </label>
+        <input type="text" name="viewSendTransactionRecipient" id="viewSendTransactionRecipient" size="40"><br>
+        <label for="viewSendTransactionSenderPubKey">Sender's Public Key: </label>
+        <input type="text" name="viewSendTransactionSenderPubKey" id="viewSendTransactionSenderPubKey" size="40"><br>
+        <label for="viewSendTransactionValue">Value: </label>
+        <input type="number" name="viewSendTransactionValue" id="viewSendTransactionValue" size="40"><br>
+        <label for="viewSendTransactionFee">Fee: </label>
+        <input type="number" name="viewSendTransactionFee" id="viewSendTransactionFee" size="40"><br><br>
+
+        <input type="submit" id="documentSignTransaction" value="Sign Transaction" /><br>
+        <textarea id="walletTransactionSigned" style="width:400pt; height: 100pt;" disabled>
+            </textarea><br><br>
+
+        <label for="viewBalanceBlockchainNode">Blockchain Node (including port): </label>
+        <input type="text" name="viewBalanceBlockchainNode" id="viewBalanceBlockchainNode" size="40">
+        <input type="submit" id="documentSendTransaction" value="Send Transaction" /><br><br>
+
+        <textarea id="walletTransactionSent" style="width:400pt; height: 100pt;" disabled>
+            </textarea>
+    </section>
+
+    <section id="viewContractDetails">
+        <h1>Tenancy Deposit Agreement</h1>
+        <!-- buttons -->
+        <label for="contract-landlordAddress">Landlord Address: </label>
+        <input type="text" name="contract-landlordAddress" id="contract-landlordAddress" class="contractAddress"  size="40"><br>
+        <label for="contract-tenantAddress">Tenant Address: </label>
+        <input type="text" name="contract-tenantAddress" id="contract-tenantAddress" size="40"><br>
+        <label for="contract-arbiterAddress">Arbiter Address: </label>
+        <input type="text" name="contract-arbiterAddress" id="contract-arbiterAddress" size="40"><br>
+        <label for="contract-deposit">Deposit: </label>
+        <input type="number" name="contract-deposit" id="contract-deposit" size="20"><br>
+        <label for="contract-balance">Balance: </label>
+        <input type="number" name="contract-balance" id="contract-balance" size="20" disabled><br>
+        <label for="contract-deduction">Deduction: </label>
+        <input type="number" name="contract-deduction" id="contract-deduction" size="20" disabled><br>
+        <label for="contract-status">Status: </label>
+        <input type="text" name="contract-status" id="contract-status" value="N/A" size="20" disabled><br>
+        <label for="contract-ropstenTestNet">Ropsten Test Net</label>
+        <input type="checkbox" name="contract-ropstenTestNet" id="contract-ropstenTestNet" value="contract-ropstenTestNet"><br>
+        <!-- buttons -->
+        <input type="button" id="documentCreateTenancyDepositContract" value="Create Contract"/>
+        <input type="button" id="documentResetTenancyDepositContract" value="Reset" />
+        <p>
+            <em>Please note that only a <strong>Landlord</strong> could create tenancy deposit agreements.</em>
+        </p>
+        <p>
+            <strong>Tenancy Deposit Solidity Contract</strong>:
+        <ul>
+            <li>keeps tenant's deposit separately from landlord's one during the renting
+                period</li>
+            <li>if the tenant caused any damages to the property during the renting
+                period, the Solidity contract deducts the compensation for them from the initially
+                paid deposit and transfers it to landlord's account (on landlord's request for withdrawal)</li>
+            <li>reimburses the tenant with the deposit (or the remaining deposit
+                after deduction for damages) after the end of the tenancy contract</li>
+        </ul>
+        </p>
+    </section>
+
+    <section id="viewLandlord">
+        <h1>Landlord</h1>
+        <strong>Tenancy Deposit Agreement</strong><br>
+        <!-- fields -->
+        <label for="landlord-landlordAddress">Landlord Address: </label>
+        <input type="text" name="landlord-landlordAddress" id="landlord-landlordAddress" size="40" disabled><br>
+        <label for="landlord-tenantAddress">Tenant Address: </label>
+        <input type="text" name="landlord-tenantAddress" id="landlord-tenantAddress" size="40" disabled><br>
+        <label for="landlord-arbiterAddress">Arbiter Address: </label>
+        <input type="text" name="landlord-arbiterAddress" id="landlord-arbiterAddress" size="40" disabled><br>
+        <label for="landlord-deposit">Deposit: </label>
+        <input type="number" name="landlord-deposit" id="landlord-deposit" size="20" disabled><br>
+        <label for="landlord-balance">Balance: </label>
+        <input type="number" name="landlord-balance" id="landlord-balance" size="20" disabled><br>
+        <label for="landlord-deduction">Deduction: </label>
+        <input type="number" name="landlord-deduction" id="landlord-deduction" size="20" disabled><br>
+        <label for="landlord-status">Status: </label>
+        <input type="text" name="landlord-status" id="landlord-status" value="N/A" size="20" disabled><br>
+        <!-- buttons -->
+        <input type="submit" id="documentLandlordTerminateContract" value="Terminate Contract" disabled/>
+        <input type="submit" id="documentLandlordClaimDeduction" value="Claim Deduction" disabled/>
+        <input type="submit" id="documentLandlordWithdrawDeduction" value="Withdraw Deduction" disabled/>
+        <p>
+            <strong>Landlord</strong> could:
+        <ul>
+            <li>create a new tenancy contract</li>
+            <li>submit a deduction claim</li>
+            <li>withdraw a deduction, which is either approved by the tenant or ruled by the arbiter in favour
+                of the landlord after resolving a dispute
+            </li>
+        </ul>
+        </p>
+    </section>
+
+    <section id="viewTenant">
+        <h1>Tenant</h1>
+        <strong>Tenancy Deposit Agreement</strong><br>
+        <!-- fields -->
+        <label for="tenant-landlordAddress">Landlord Address: </label>
+        <input type="text" name="tenant-landlordAddress" id="tenant-landlordAddress" size="40" disabled><br>
+        <label for="tenant-tenantAddress">Tenant Address: </label>
+        <input type="text" name="tenant-tenantAddress" id="tenant-tenantAddress" size="40" disabled><br>
+        <label for="tenant-arbiterAddress">Arbiter Address: </label>
+        <input type="text" name="tenant-arbiterAddress" id="tenant-arbiterAddress" size="40" disabled><br>
+        <label for="tenant-deposit">Deposit: </label>
+        <input type="number" name="tenant-deposit" id="tenant-deposit" size="20" disabled><br>
+        <label for="tenant-balance">Balance: </label>
+        <input type="number" name="tenant-balance" id="tenant-balance" size="20" disabled><br>
+        <label for="tenant-deduction">Deduction: </label>
+        <input type="number" name="tenant-deduction" id="tenant-deduction" size="20" disabled><br>
+        <label for="tenant-status">Status: </label>
+        <input type="text" name="tenant-status" id="tenant-status" value="N/A" size="20" disabled><br>
+        <!-- buttons -->
+        <input type="submit" id="documentTenantSignContract" value="Sign Contract" disabled/>
+        <input type="submit" id="documentTenantTerminateContract" value="Terminate Contract" disabled/>
+        <input type="submit" id="documentTenantClaimDeduction" value="Claim Deduction" disabled/>
+        <input type="submit" id="documentTenantWithdrawDeposit" value="Withdraw Deposit" disabled/>
+        <p>
+            <strong>Tenant</strong> could:
+        <ul>
+            <li>sign a tenancy contract thus paying the deposit amount</li>
+            <li>submit a deduction claim (in order to agree with or object to landlord's deduction claim</li>
+            <li>withdraw the paid deposit or eventually (deposit - deduction), which deduction is either agreed
+                with the landlord or the arbiter resolves a dispute in favour of the landlord and rules given
+                deduction amount
+            </li>
+        </ul>
+        </p>
+    </section>
+
+    <section id="viewArbiter">
+        <h1>Arbiter</h1>
+        <strong>Tenancy Deposit Agreement</strong><br>
+        <!-- fields -->
+        <label for="arbiter-landlordAddress">Landlord Address: </label>
+        <input type="text" name="arbiter-landlordAddress" id="arbiter-landlordAddress" size="40" disabled><br>
+        <label for="arbiter-tenantAddress">Tenant Address: </label>
+        <input type="text" name="arbiter-tenantAddress" id="arbiter-tenantAddress" size="40" disabled><br>
+        <label for="arbiter-arbiterAddress">Arbiter Address: </label>
+        <input type="text" name="arbiter-arbiterAddress" id="arbiter-arbiterAddress" size="40" disabled><br>
+        <label for="arbiter-deposit">Deposit: </label>
+        <input type="number" name="arbiter-deposit" id="arbiter-deposit" size="20" disabled><br>
+        <label for="arbiter-balance">Balance: </label>
+        <input type="number" name="arbiter-balance" id="arbiter-balance" size="20" disabled><br>
+        <label for="arbiter-deduction">Deduction: </label>
+        <input type="number" name="arbiter-deduction" id="arbiter-deduction" size="20" disabled><br>
+        <label for="arbiter-status">Status: </label>
+        <input type="text" name="arbiter-status" id="arbiter-status" value="N/A" size="20" disabled><br>
+        <!-- buttons -->
+        <input type="submit" id="documentArbiterResolveDispute" value="Resolve Dispute" disabled/>
+        <!--<input type="button" id="documentClaimTenantDeduction" value="Submit"/><br>-->
+        <!--<input type="button" id="documentWithdrawDeduction" value="Submit"/>-->
+        <p>
+            <strong>Arbiter</strong> could:
+        <ul>
+            <li>rule a deduction amount in favour of the landlord in case of a dispute</li>
+        </ul>
+        </p>
+    </section>
+</main>
+
+<footer>Blockchain DevCamp Wallet<br>&quot;Blockchain Dev Camp - Sofia - February 2018&quot;</footer>
+</body>
+</html>
