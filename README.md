@@ -4,7 +4,7 @@ The `Wallet App` is an application which:
 * [Creates a new wallet (generating private and public key on behalf of the user)](#create-wallet)
 * [Loads an existing wallet (by data + password)](#load-existing-wallet)
 * [Creates, signs](#create-transaction) and [sends](#send-transaction) transactions
-* Provides [access to balance](#retrieve-a-wallet's-balance)
+* Provides [access to balance](#retrieve-a-wallets-balance)
 
 # Launching
 
