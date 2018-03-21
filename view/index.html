@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8"/>
+    <title>Blockchain DevCamp Wallet</title>
+    <link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
+    <link rel="stylesheet" type="text/css" href="wallet.css"/>
+    <script src="lib/jquery-3.3.1.min.js"></script>
+    <script src="wallet.js"></script>
+</head>
+
+<body>
+<header id="menu">
+    <a href="#" id="linkHome">Home</a>
+    <a href="#" id="linkCreateWallet">Create Wallet</a>
+    <a href="#" id="linkLoadWallet">Load Wallet</a>
+    <a href="#" id="linkViewBalance">Balance</a>
+    <a href="#" id="linkSendTransaction">Send Transaction</a>
+</header>
+
+<main>
+    <section id="loadingBox">Loading ...</section>
+
+    <section id="infoBox">
+        <header>x</header>
+        <p>Info</p></section>
+
+    <section id="errorBox">
+        <header>x</header>
+        <p>Error</p></section>
+
+    <section id="viewHome">
+        <h1>Blockchain DevCamp Wallet</h1>
+        <p>Welcome to the "Blockchain DevCamp Wallet"</p>
+        <p>This application lets you manage your wallet.</p>
+        It allows you to:
+        <ul>
+            <li>Create a new wallet (generating private and public key on behalf of the user</li>
+            <li>Load an existing wallet (by private key)</li>
+            <li>Create, sign and send transactions</li>
+            <li>Provides access to balance</li>
+        </ul>
+    </section>
+
+    <section id="viewCreateWallet">
+        <h1>Create New Wallet</h1>
+        <p>Generate a new wallet: random private key -&gt; public key -&gt; address.</p>
+
+        <input type="submit" id="documentCreateWallet" value="Generate Now" /><br><br>
+        <textarea id="newWalletContainer" style="width:400pt; height: 100pt;" disabled>
+        </textarea>
+    </section>
+
+    <section id="viewLoadWallet">
+        <h1>Open an Existing Wallet</h1>
+        <p>Enter your wallet private key (compressed ECDSA key, 65 hex digits):</p>
+        <input type="text" name="walletPrivateKey" id="walletPrivateKey" size="65"><br>
+        <input type="submit" id="documentLoadWallet" value="Open Wallet" /><br><br>
+        <textarea id="existingWalletContainer" style="width:400pt; height: 100pt;" disabled>
+        </textarea>
+    </section>
+
+    <section id="viewBalance">
+        <h1>View Account Balance</h1>
+        <label for="viewBalanceWalletAddress">Address: </label>
+        <input type="text" name="viewBalanceWalletAddress" id="viewBalanceWalletAddress" size="40"><br>
+        <label for="viewBalanceBlockchainNode">Blockchain Node (including port): </label>
+        <input type="text" name="viewBalanceBlockchainNode" id="viewBalanceBlockchainNode" size="40"><br>
+        <input type="submit" id="documentViewBalance" value="Display Balance" /><br><br>
+        <textarea id="walletBalanceContainer" style="width:400pt; height: 100pt;" disabled>
+            </textarea>
+    </section>
+
+    <section id="viewSendTransaction">
+        <h1>Send Transaction</h1>
+        <label for="viewSendTransactionSender">Sender: </label>
+        <input type="text" name="viewSendTransactionSender" id="viewSendTransactionSender" size="40"><br>
+        <label for="viewSendTransactionRecipient">Recipient: </label>
+        <input type="text" name="viewSendTransactionRecipient" id="viewSendTransactionRecipient" size="40"><br>
+        <label for="viewSendTransactionSenderPubKey">Sender's Public Key: </label>
+        <input type="text" name="viewSendTransactionSenderPubKey" id="viewSendTransactionSenderPubKey" size="40"><br>
+        <label for="viewSendTransactionValue">Value: </label>
+        <input type="number" name="viewSendTransactionValue" id="viewSendTransactionValue" size="40"><br>
+        <label for="viewSendTransactionFee">Fee: </label>
+        <input type="number" name="viewSendTransactionFee" id="viewSendTransactionFee" size="40"><br><br>
+
+        <input type="submit" id="documentSignTransaction" value="Sign Transaction" /><br>
+        <textarea id="walletTransactionSigned" style="width:400pt; height: 100pt;" disabled>
+            </textarea><br><br>
+
+        <!--<label for="viewBalanceBlockchainNode">Blockchain Node (including port): </label>-->
+        <!--<input type="text" name="viewBalanceBlockchainNode" id="viewBalanceBlockchainNode" size="40">-->
+        <input type="submit" id="documentSendTransaction" value="Send Transaction" /><br><br>
+
+        <textarea id="walletTransactionSent" style="width:400pt; height: 100pt;" disabled>
+            </textarea>
+    </section>
+
+</main>
+
+<footer>Blockchain DevCamp Wallet<br>&quot;Blockchain Dev Camp - Sofia - February 2018&quot;</footer>
+</body>
+</html>

@@ -55,7 +55,7 @@ module.exports = {
         next();
     },
 
-    submitTransaction: async (rqst, rspns) => {
+    submitTransaction: async (rqst, rspns, next) => {
         let transaction = Transaction.createTransaction(rqst);
         let transactionHash = new TransactionHash(transaction);
         let options = {
@@ -68,17 +68,19 @@ module.exports = {
 
         await request(options, function (err, res, transactionHashBody) {
             if (err) {
-                throw Error("Error: " + err.getMessage());
+                next(new Error("Error: " + err.getMessage()));
+                return;
             }
             if (!transactionHashBody || !transactionHashBody.transactionHash
                 || transactionHash.transactionHash !== transactionHashBody.transactionHash) {
-                throw Error("Compromised transaction.");
+                next(new Error("Compromised transaction."));
+                return;
             }
 
             rspns.status(201);
             rspns.set('Content-Type', 'application/json');
-            response.header("Access-Control-Allow-Origin", "*");
-            response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+            rspns.header("Access-Control-Allow-Origin", "*");
+            rspns.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
             rspns.send(transactionHashBody);
         });
     }

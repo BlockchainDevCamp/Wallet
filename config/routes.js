@@ -11,18 +11,20 @@ module.exports = app => {
     // Wallet Endpoints
     app.get("/wallets/:address", controllers.walletResource.retrieveWalletByAddress);
     app.get("/wallets/:address/balance", controllers.walletResource.retrieveWalletBalance);
-    app.post("/wallets", controllers.walletResource.createWallet);
-    app.put("/wallets", controllers.walletResource.loadWallet);
 
     // Transaction Endpoints
-    app.post('/wallets/:address/transactions', [
-        controllers.transactionResource.validateTransactionData,
-        controllers.transactionResource.createTransaction
-    ]);
     app.post('/wallets/:address/transactions/send', [
         controllers.transactionResource.validateTransactionData,
         controllers.transactionResource.submitTransaction
     ]);
+    app.post('/wallets/:address/transactions', [
+        controllers.transactionResource.validateTransactionData,
+        controllers.transactionResource.createTransaction
+    ]);
+
+
+    app.post("/wallets", controllers.walletResource.createWallet);
+    app.put("/wallets", controllers.walletResource.loadWallet);
 
     app.use(controllers.errorHandler.handle);
 
