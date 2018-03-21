@@ -197,7 +197,7 @@ GET /wallets/0a37ccb342861218ea8331fdf6e4a4a6521e3e55/balance
 
 # Wallet UI
 
-The wallet UI could be accessed at the host where the wallet is deployed, e.g. `http://http://194.129.62.10:5556`, assuming that the wallet app is listening at port `5556`.
+The wallet UI could be accessed at the host where the wallet is deployed, e.g. `http://194.129.62.10:5556`, assuming that the wallet app is listening at port `5556`.
 
 Some screeshots of the UI are available below.
 
