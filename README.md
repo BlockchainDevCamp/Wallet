@@ -195,6 +195,27 @@ GET /wallets/0a37ccb342861218ea8331fdf6e4a4a6521e3e55/balance
 }
 ```
 
+# Wallet UI
+
+The wallet UI could be accessed at the host where the wallet is deployed, e.g. `http://http://194.129.62.10:5556`, assuming that the wallet app is listening at port `5556`.
+
+Some screeshots of the UI are available below.
+
+## Home Page
+
+![Home Page](ui-screenshots/wallet-ui-home.png?raw=true "Home Page")
+
+## Create a New Wallet
+![Create a New Wallet](ui-screenshots/wallet-ui-create-wallet.png?raw=true "Create a New Wallet")
+
+## Load an Existing Wallet 
+![Load an Existing Wallet](ui-screenshots/wallet-ui-load-existing-wallet.png?raw=true "Load an Existing Wallet")
+
+## Check Wallet's Balance
+![Check Wallet's Balance](ui-screenshots/wallet-ui-balance-check.png?raw=true "Check Wallet's Balance")
+
+## Sign and Send a Transaction
+![Sign and Send a Transaction](ui-screenshots/wallet-ui-sign-and-send-transaction.png?raw=true "Sign and Send a Transaction")
 
 # Future Work
 * The `Wallet App` might be based on the HD wallet standards (BIP-39 / BIP-32)
