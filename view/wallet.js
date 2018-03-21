@@ -88,34 +88,17 @@ $(document).ready(function () {
 
     function sendTransaction() {
         let txSender = $('#viewSendTransactionSender').val();
-        let txSenderPubKey = $('#viewSendTransactionSenderPubKey').val();
-        let txRecipient = $('#viewSendTransactionRecipient').val();
-        let txValue = $('#viewSendTransactionValue').val();
-        let txFee = $('#viewSendTransactionFee').val();
-        let postRequestPayload = {
-            from: txSender,
-            to: txRecipient,
-            senderPubKey: txSenderPubKey,
-            value: txValue,
-            fee: txFee
-        };
-        let signedTransactionPayload = null;
-        $.post("/wallets/" + txSender + "/transactions", postRequestPayload).then(function(signedTransaction) {
-            signedTransactionPayload = signedTransaction;
-            $('#walletTransactionSigned').val(JSON.stringify(signedTransaction));
-        }).then(function() {
-            $.post("/wallets/" + txSender + "/transactions/send", signedTransactionPayload)
-                .then(function (signedTransaction) {
-                    console.log(">> " + signedTransaction);
-                    let sentTransactionInfo = "Transaction successfully sent. \n" +
-                        "Transaction hash: " + signedTransaction.transactionHash;
-                    $('#walletTransactionSent').val(JSON.stringify(sentTransactionInfo));
-                })
-                .catch(function (err) {
-                    console.error(err);
-                });
-        });
-    }
+        let signedTransactionPayload = JSON.parse($('#walletTransactionSigned').val());
+        $.post("/wallets/" + txSender + "/transactions/send", signedTransactionPayload)
+            .then(function (signedTransaction) {
+                let sentTransactionInfo = "Transaction successfully sent. \n" +
+                    "Transaction hash: " + signedTransaction.transactionHash;
+                $('#walletTransactionSent').val(sentTransactionInfo);
+            })
+            .catch(function (err) {
+                console.error(err);
+            });
+    };
 
     function createTenancyDepositContractData() {
         console.log("setup Tenancy Deposit Contract Details...");
@@ -126,11 +109,6 @@ $(document).ready(function () {
             let arbiterAddress = $('#contract-arbiterAddress').val();
             let deposit = $('#contract-deposit').val();
             let isRopstenTestNet = $('#contract-ropstenTestNet').is(':checked');
-
-            // validate input
-            // validateActorAddress(landlordAddress, "landlord");
-            // validateActorAddress(tenantAddress, "tenant");
-            // validateActorAddress(arbiterAddress, "arbiter");
 
             createContract(isRopstenTestNet, landlordAddress, tenantAddress, arbiterAddress, deposit, defaultCallbackHandler);
 

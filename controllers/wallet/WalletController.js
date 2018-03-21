@@ -24,7 +24,8 @@ module.exports = {
 
     retrieveWalletByAddress(request, response) {
         if (process.env.NODE_ENV !== 'development') {
-            throw new Error("Not Found.");
+            next(new Error("Not Found."));
+            return;
         }
         response.set('Content-Type', 'application/json');
         response.send(request.wallet);

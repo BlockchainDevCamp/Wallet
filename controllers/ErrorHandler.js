@@ -15,6 +15,7 @@ module.exports = {
             case "Invalid transaction amount.":
             case "Invalid transaction fee.":
             case "Wallet already exists.":
+            case "Compromised transaction.":
                 response.status(400);
                 break;
             case "Wallet not found.":
