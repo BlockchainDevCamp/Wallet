@@ -13,6 +13,8 @@ module.exports = {
 
             response.status(200);
             response.set('Content-Type', 'application/json');
+            response.header("Access-Control-Allow-Origin", "*");
+            response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
             response.send(transaction);
         } catch (err) {
             console.error(err);
@@ -77,6 +79,8 @@ module.exports = {
 
             rspns.status(201);
             rspns.set('Content-Type', 'application/json');
+            response.header("Access-Control-Allow-Origin", "*");
+            response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
             rspns.send(transactionHashBody);
         });
     }

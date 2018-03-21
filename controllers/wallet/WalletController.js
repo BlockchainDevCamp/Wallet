@@ -17,6 +17,8 @@ function handleWalletCreation(request, response, wallet) {
 
     response.status(status);
     response.set('Content-Type', 'application/json');
+    response.header("Access-Control-Allow-Origin", "*");
+    response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     response.send(walletInfo);
 }
 
@@ -28,6 +30,8 @@ module.exports = {
             return;
         }
         response.set('Content-Type', 'application/json');
+        response.header("Access-Control-Allow-Origin", "*");
+        response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         response.send(request.wallet);
     },
 
@@ -55,6 +59,8 @@ module.exports = {
                 throw Error("Error: " + err.getMessage());
             }
             response.set('Content-Type', 'application/json');
+            response.header("Access-Control-Allow-Origin", "*");
+            response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
             response.send(balance);
         });
 
